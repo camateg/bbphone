@@ -1,0 +1,15 @@
+%html
+	%head
+		%title
+			Call someone...
+	%body
+		%form{:method=>'POST',:action=>'/call'}
+			%input{:name=>'message'}
+			%select{:name=>'priority'}
+				%option{:value=>'low'}
+					LOW
+				%option{:value=>'med'}
+					MED
+				%option{:value=>'high'}
+					HIGH
+			%input{:type=>'submit',:value=>'Call'}

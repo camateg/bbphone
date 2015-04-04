@@ -1,0 +1,10 @@
+{
+  "name": "bbphone",
+  "version": "0.0.2",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "express": "x.x.x",
+    "socket.io": "x.x.x",
+    "serialport": "x.x.x"
+  }
+}
