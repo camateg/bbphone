@@ -1,5 +1,6 @@
 var app = require('express')(),
     http = require('http').Server(app),
+    request = require('request'),
     io = require('socket.io')(http),
     serialport = require("serialport"),
     SerialPort = serialport.SerialPort;
@@ -36,6 +37,8 @@ sp.on('open', function(){
        var phJson = {};
        phJson['type'] = 'num_event';
        phJson['status'] = numAccum;
+
+       request.post({url:'http://localhost:4567/call', form: {message: 'You dialed' + numAccum,priority: 'low'}});
        io.emit('data_ready', phJson);
        numAccum = ''; 
      }

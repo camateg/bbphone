@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "x.x.x",
     "socket.io": "x.x.x",
-    "serialport": "x.x.x"
+    "serialport": "x.x.x",
+    "request": "x.x.x"
   }
 }
