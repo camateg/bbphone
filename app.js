@@ -38,7 +38,14 @@ sp.on('open', function(){
        phJson['type'] = 'num_event';
        phJson['status'] = numAccum;
 
-       request.post({url:'http://localhost:4567/call', form: {message: 'You dialed' + numAccum,priority: 'low'}});
+       var phText = '';
+
+       for(s in numAccum) {
+         phText += ' ' + numAccum[s];
+       } 
+
+       request.post({url:'http://localhost:4567/call', form: {message: 'You dialed' + phText, priority: 'low'}});
+
        io.emit('data_ready', phJson);
        numAccum = ''; 
      }
