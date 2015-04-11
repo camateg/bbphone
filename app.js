@@ -8,7 +8,7 @@ var app = require('express')(),
 var sp = new SerialPort("/dev/ttyACM0", {parser: serialport.parsers.readline("\n")});
 
 var numAccum = '';
-var hookState = 0;
+var hookState = 1;
 
 sp.on('open', function(){
   sp.flush();
@@ -20,11 +20,11 @@ sp.on('open', function(){
 
      io.emit('data_ready', dataJson);
 
-     if ((dataJson['type'] == 'hook_event') && (dataJson['status'] == '1')) {
+     if ((dataJson['type'] == 'hook_event') && (dataJson['status'] == '0')) {
        hookState = 1;
      } 
      
-     if ((dataJson['type'] == 'hook_event') && (dataJson['status'] == '0')) {
+     if ((dataJson['type'] == 'hook_event') && (dataJson['status'] == '1')) {
        hookState = 0;
        numAccum = '';
      }
