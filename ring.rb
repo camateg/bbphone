@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'haml'
-require 'espeak'
 require 'json'
 get '/' do
 	haml :index
