@@ -3,6 +3,7 @@ require 'fileutils'
 require 'net/http'
 require 'json'
 require './Ptt.rb'
+require './serial.rb'
 
 def poll_hook
         res = Net::HTTP.get(URI.parse('http://localhost:3000/hook'))
@@ -31,7 +32,7 @@ def ring_phone
 
 end
 
-$sp = Ptt.new('/dev/ttyUSB0')
+$sp = Ptt.new($ptt_port)
 
 while 1 do
 	begin

@@ -5,7 +5,14 @@ var app = require('express')(),
     serialport = require("serialport"),
     SerialPort = serialport.SerialPort;
 
-var sp = new SerialPort("/dev/ttyACM0", {parser: serialport.parsers.readline("\n")});
+os = process.platform
+var port = '/dev/ttyACM0';
+
+if (os == 'darwin') {
+  port = '/dev/tty.usbmodemfd131';
+}
+
+var sp = new SerialPort(port, {parser: serialport.parsers.readline("\n")});
 
 var numAccum = '';
 var hookState = 1;
