@@ -9,7 +9,7 @@ os = process.platform
 var port = '/dev/ttyACM0';
 
 if (os == 'darwin') {
-  port = '/dev/tty.usbmodemfd131';
+  port = '/dev/tty.usbmodemfd1241';
 }
 
 var sp = new SerialPort(port, {parser: serialport.parsers.readline("\n")});
@@ -40,7 +40,9 @@ sp.on('open', function(){
        numAccum = numAccum.concat(dataJson['status']);
      }
 
-     if (numAccum.length >= 4) {
+     console.log(numAccum);
+
+     if (numAccum.length >= 3) {
        var phJson = {};
        phJson['type'] = 'num_event';
        phJson['status'] = numAccum;
@@ -51,7 +53,11 @@ sp.on('open', function(){
          phText += ' ' + numAccum[s];
        } 
 
-       request.post({url:'http://localhost:4567/call', form: {message: 'You dialed' + phText, priority: 'low'}});
+       if (numAccum == '311') {
+         request.post({url:'http://localhost:4567/chuck.norris'});
+       } else {
+         request.post({url:'http://localhost:4567/call', form: {message: 'You dialed' + phText, priority: 'low'}});
+       }
 
        io.emit('data_ready', phJson);
        numAccum = ''; 

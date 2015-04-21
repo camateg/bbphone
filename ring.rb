@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'haml'
 require 'json'
+
+require './joke.rb'
+
+
 get '/' do
 	haml :index
 end
@@ -8,9 +12,13 @@ end
 post '/call' do
 	message = params['message']
 
-	queue_message the_json['message']
+	queue_message message
 
 	'Your message will be sent...  Maybe?'
+end
+
+post '/chuck.norris' do
+	do_joke
 end
 
 post '/call.json' do

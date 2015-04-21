@@ -27,9 +27,10 @@ def do_joke
 
 	if joke['type'] == 'success'
 		sfn = '/tmp/message_' + rand(1000-9999).to_s + '.txt'
-        	File.write(sfn, joke)
-	end
-	
+        	joke_txt = joke['value']['joke']
+		File.write(sfn, joke_txt)
+		joke_txt
+	else
+		'error'
+	end	
 end
-
-do_joke
