@@ -21,7 +21,7 @@ def do_joke
 
 	person = people[rand(0..people.length-1)]
 
-	url = ep + '?firstName=' + person['fn'] + '&lastName=' + person['ln'] + '&escape=javascript&exclude=[explicit]'
+	url = ep + '?firstName=' + person['fn'] + '&lastName=' + person['ln'] + '&escape=javascript&' + "exclude=\[explicit\]"
 
 	joke = JSON.parse(Net::HTTP.get(URI.parse(url)))
 
