@@ -38,12 +38,17 @@ while 1 do
 	begin
 		Dir.glob('/tmp/message_*').each do |f|
 			message = File.read(f)
-			speech = ESpeak::Speech.new(message)
+			
 			ring_phone
 			
-			sleep 3.5 
+			sleep 2.5 
 
-			speech.speak
+			if $platform == 'mac'
+				%x(say #{message})	
+			else
+				speech = ESpeak::Speech.new(message)
+				speech.speak
+			end
 			FileUtils.rm f
 
 			sleep 30
